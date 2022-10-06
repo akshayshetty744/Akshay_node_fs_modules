@@ -8,21 +8,24 @@ fs.readFile("./abc.json", "utf8", (err, data) => {
     let a = Math.random() * 10;
     fs.appendFile(`./randomJsonfiles/${a}.json`, data, "utf8", (err) => {
       if (err) throw err;
-      else console.log("file created successfully");
+      else {
+        fs.readdir("./randomJsonfiles", (err, data) => {
+            if (err) throw err;
+            else {
+              data.map((e) => {
+                fs.unlink(`./randomJsonfiles/${e}`, (err) => {
+                  if (err) throw err;
+                  console.log(`${data}.json was deleted`);
+                });
+              });
+            }
+          });
+          console.log("file created successfully");
+      }
     });
   }
 });
 
 //deleting all random files
 
-fs.readdir("./randomJsonfiles", (err, data) => {
-  if (err) throw err;
-  else {
-    data.map((e) => {
-      fs.unlink(`./randomJsonfiles/${e}`, (err) => {
-        if (err) throw err;
-        console.log(`${data}.json was deleted`);
-      });
-    });
-  }
-});
+
