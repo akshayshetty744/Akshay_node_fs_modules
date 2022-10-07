@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 //1. Create a directory of random JSON files
-
+//2.deleting all random files
 fs.readFile("./abc.json", "utf8", (err, data) => {
   if (err) throw err;
   else {
@@ -10,22 +10,22 @@ fs.readFile("./abc.json", "utf8", (err, data) => {
       if (err) throw err;
       else {
         fs.readdir("./randomJsonfiles", (err, data) => {
-            if (err) throw err;
-            else {
-              data.map((e) => {
-                fs.unlink(`./randomJsonfiles/${e}`, (err) => {
-                  if (err) throw err;
-                  console.log(`${data}.json was deleted`);
-                });
+          if (err) throw err;
+          else {
+            data.map((e) => {
+              fs.unlink(`./randomJsonfiles/${e}`, (err) => {
+                if (err) throw err;
+                console.log(`${data}.json was deleted`);
               });
-            }
-          });
-          console.log("file created successfully");
+            });
+          }
+        });
+        console.log("file created successfully");
       }
     });
   }
 });
 
-//deleting all random files
+
 
 
